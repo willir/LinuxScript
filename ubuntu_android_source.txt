@@ -1,0 +1,119 @@
+#install JDK
+#----------
+#sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
+#sudo add-apt-repository "deb-src http://archive.canonical.com/ubuntu lucid partner"
+#sudo apt-get update
+#sudo apt-get install sun-java6-jdk
+	#or
+sudo apt-get install openjdk-6-jdk
+
+sudo apt-get install sun-java5-jdk
+#----------
+
+#install other packets
+#----------
+sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos
+
+sudo apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush squashfs-tools squashfs-tools-dbg build-essential wget schedtool
+
+#----------
+
+
+# full comand for all
+#----------
+sudo apt-get install git-core gnupg openjdk-6-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush squashfs-tools squashfs-tools-dbg build-essential wget && wget
+http://dl.google.com/android/android-sdk_r06-linux_86.tgz && wget http://dl.google.com/android/ndk/android-ndk-r4b-linux-x86.zip && gzip -dvf ./android-sdk_r06-linux_86.tgz && tar -xvf ./android-sdk_r06-linux_86.tar && unzip android-ndk-r4b-linux-x86.zip && rm -rf android-ndk-r4b-linux-x86.zip && rm -rf android-sdk_r06-linux_86.tar && mkdir ~/bin && curl http://android.git.kernel.org/repo >~/bin/repo && chmod a+rx ~/bin/repo && sudo ln -s ~/bin/repo /usr/bin/repo
+#----------
+
+#for usb
+echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | sudo tee /etc/udev/rules.d/51-android.rules >> /dev/null # for htc
+sudo chmod a+r /etc/udev/rules.d/51-android.rules
+# see http://developer.android.com/guide/developing/device.html
+
+#for repo
+mkdir ~/bin
+PATH=~/bin:$PATH
+curl https://android.git.kernel.org/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+
+#unpack ramdisk.img
+#----------
+mkdir ramdisk
+cp ramdisk.img ramdisk/ramdisk.cpio.gz
+cd ramdisk/
+gzip -d ramdisk.cpio.gz
+cpio -i -F ramdisk.cpio
+rm ramdisk.cpio
+cd ..
+	#or together
+mkdir ramdisk && cp ramdisk.img ramdisk/ramdisk.cpio.gz && cd ramdisk/ && gzip -d ramdisk.cpio.gz && cpio -i -F ramdisk.cpio && rm ramdisk.cpio && cd ..
+#----------
+
+# create ramdisk.img
+#----------
+cd ramdisk
+find . -print | cpio -o -Hnewc | gzip > ramdisk.img
+mv ramdisk.img ../ramdisk.img
+cd ..
+	#or together
+cd ramdisk && find . -print | cpio -o -Hnewc | gzip > ../ramdisk.img && cd ..
+#----------
+
+#unpack system.img
+#----------
+mkdir system
+cd system
+unyaffs ../system.img
+cd ..
+	#or together
+mkdir system && cd system && unyaffs ../system.img && cd ..
+#----------
+
+pack system.img
+#----------
+mkyaffs2image system system.img #I am not sure....
+#----------
+
+#create boot.img
+#----------
+mkbootimg --kernel zImage --ramdisk ramdisk.img --base 0x12c00000 --cmdline "no_console_suspend=1 console=null" -o boot.img
+#----------
+
+#download script for split boot.img
+#----------
+wget http://zen-droid.googlecode.com/files/split_bootimg.pl
+chmod +x split_bootimg.pl
+mv split_bootimg.pl bin/split_bootimg.pl
+#----------
+#split boot.img
+#----------
+split_bootimg.pl boot.img
+# boot.img-kernel == zImage, boot.img-ramdisk.gz == ramdisk.img
+#----------
+
+# su
+#-----------
+https://github.com/CyanogenMod/android_system_su
+#-----------
+
+# Compiling
+#-----------
+. build/envsetup.sh 
+brunch
+	#or
+. build/envsetup.sh 
+lunch
+make
+
+#-----------
+
+# flash from shell.
+#------------
+fastboot erase boot
+fastboot erase recovery
+fastboot flash system system.img
+fastboot flash boot boot.img
+fastboot flash userdata data.img
+fastboot flash recovery recovery.img
+fastboot reboot
+#------------

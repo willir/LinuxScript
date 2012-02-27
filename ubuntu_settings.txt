@@ -1,0 +1,34 @@
+sudo apt-get upgrade
+
+gconftool-2 --set "/apps/metacity/general/button_layout" --type string "menu:minimize,maximize,close" # close to the right
+
+sudo apt-get remove pitivi #del pitivi for change video
+sudo apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant messages
+sudo apt-get remove gwibber gwibber-service #The client of microblogs
+sudo apt-get remove vino #for show destop.
+sudo apt-get remove computer-janitor-gtk # for system clearing.
+sudo apt-get remove rhythmbox totem totem-common #default video and audio players.
+sudo apt-get remove banshee # banshee.
+sudo dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
+
+gconftool-2 --type boolean --set /desktop/gnome/peripherals/keyboard/indicator/showFlags true #for other show USA/RUS
+#next move icons ru.png and us.png into ~/.icons or ~/.icons/flags and reboot computer.
+gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true# added icons in menu
+gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true # added icons in buttons
+
+# add new repository
+#-------------------
+echo "deb http://archive.canonical.com/ubuntu maverick partner #for skype" | sudo tee -a /etc/apt/sources.list # add new repository, for skype.
+	#or
+sudo add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner #for skype"
+#-------------------
+
+# set alternative JDK
+#-------------------
+sudo update-alternatives --config java
+sudo update-java-alternatives -l # print list alternatives
+sudo update-java-alternatives -s java-1.5.0-sun # set java5.
+
+sudo rm /etc/alternatives/javac && sudo ln -s /usr/lib/jvm/java-1.6.0-openjdk/bin/javac /etc/alternatives/javac && sudo chmod 777 /etc/alternatives/javac #change javac version
+#-------------------
+

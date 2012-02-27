@@ -1,0 +1,15 @@
+
+# path to java 
+#--------------------
+gedit eclipse.ini
+
+#-vm
+#/home/willir/Applications/jdk1.5.0_22/bin/java
+
+#http://wiki.eclipse.org/Eclipse.ini
+#--------------------
+
+Install sequoyah:
+Help->Install new Software.
+sequoyah
+http://download.eclipse.org/sequoyah/updates/2.0/

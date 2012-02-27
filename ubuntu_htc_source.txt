@@ -1,0 +1,105 @@
+
+# get some config and library from devices
+#--------------------
+# go to https://github.com/CyanogenMod/android_device_htc_legend
+# or like for other device and dowload this folder.
+# then extract and move to android_source/device/htc
+# and rename as 'legend' or another.
+
+# then connect deivce to computer by usb. and execute this:
+cd android_source/device/htc/legend
+./extract-files.sh
+
+
+
+cd ../../..
+source build/envsetup.sh
+lunch generic_legend-eng
+
+
+# CORRECT ERRORS
+#============================================================
+# if build/core/product_config.mk:190: *** _nic.PRODUCTS.[[device/htc/legend/legend.mk]]: "build/target/product/full_base.mk" does not exist.  Stop.
+gedit device/htc/legend/legend.mk
+$(call inherit-product, build/target/product/full_base.mk) => $(call inherit-product, build/target/product/full.mk)
+#------------------------
+
+# if build/core/combo/TARGET_linux-arm.mk:39: *** Unknown ARM architecture version: armv6-vfp.  Stop.
+gedit device/htc/legend/BoardConfig.mk
+TARGET_ARCH_VARIANT := armv6-vfp => TARGET_ARCH_VARIANT := armv7-a-neon
+#------------------------
+
+# if like this: device/htc/legend/overlay/frameworks/base/core/res/res/values/config.xml:47: error: Resource at config_animateScreenLights appears in overlay but not in the base package; use <add-resource> to add.
+
+gedit device/htc/legend/overlay/frameworks/base/core/res/res/values/config.xml
+# and comment lines with number '47'.
+#------------------------
+
+# if make: *** No rule to make target `out/target/product/legend/obj/STATIC_LIBRARIES/librecovery_ui_legend_intermediates/librecovery_ui_legend.a', needed by `out/target/product/legend/obj/EXECUTABLES/recovery_intermediates/LINKED/recovery'.  Stop.
+
+gedit device/htc/legend/BoardConfig.mk
+and comment "TARGET_RECOVERY_UI_LIB := librecovery_ui_legend librecovery_ui_htc"
+#------------------------
+
+# if like this: target Executable: app_process (out/target/product/legend/obj/EXECUTABLES/app_process_intermediates/LINKED/app_process)
+#	out/target/product/legend/obj/lib/libgps.so: undefined reference to `_debug_pthread_create'
+
+# http://gitorious.org/replicant/android_bionic/commit/5437e94510baae1530bbf62fc904695b7eeaf395/diffs
+
+# 1) 
+gedit bionic/libc/include/pthread.h
+# and insert this:
+int _debug_pthread_create(void *debug0, void *debug1, pthread_t *thread,
+                          const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg);
+
+# 2)
+gedit bionic/libc/bionic/pthread.c
+# and insert this:
+int _debug_pthread_create(void *debug0, void *debug1, pthread_t *thread,
+		const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg)
+{
+	return pthread_create(thread, attr, start_routine, arg);
+}
+#------------------------
+
+# To fix the camera
+# Load and replace in source
+# https://github.com/CyanogenMod/android_frameworks_base/blob/66dd36568601659e4a3be5da126a10fb67b83948/services/camera/libcameraservice/Android.mk
+# https://github.com/CyanogenMod/android_frameworks_base/blob/cdf034cb51a87698310ee34bc413e9293e222cff/services/camera/libcameraservice/CameraService.cpp
+
+# Then add to the device vendor board config file:
+# BOARD_USE_FROYO_LIBCAMERA := true
+#------------------------
+
+#if out/target/product/legend/obj/lib/libcamera.so: undefined reference to `SkPaint::measureText(void const*, unsigned int, SkRect*, int, float) const'
+
+gedit external/skia/src/core/SkPaint.cpp
+
+SkScalar SkPaint::measureText(const void* textData, size_t length,
+                              SkRect* bounds, int zoom, float notUsed) const
+{
+    return this->measureText(textData, length, bounds, zoom);
+}
+
+
+gedit external/skia/include/core/SkPaint.cpp
+# and add this:
+/** Return the width of the text.
+    @param text         The text to be measured
+    @param length       Number of bytes of text to measure
+    @param bounds       If not NULL, returns the bounds of the text,
+                        relative to (0, 0).
+    @param scale        If not 0, return width as if the canvas were scaled
+                        by this value
+	@param notUsed      I don't know what is it, by it used in 
+	                    "libcamera.so" from divece.
+    @return             The advance width of the text
+*/
+SkScalar    measureText(const void* text, size_t length,
+                        SkRect* bounds, int scale, float notUsed) const;
+#------------------------
+
+# If error in folder external/wpa_supplicant_6 then resave some files....
+#------------------------
+#============================================================
+

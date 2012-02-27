@@ -1,0 +1,50 @@
+
+#Creating filesystem with parameters:
+system/extras/ext4_utils/make_ext4fs.c
+
+#make_ext4fs -l:
+out/host/linux-x86/obj/EXECUTABLES/mkuserimg.sh_intermediates/mkuserimg.sh:echo "make_ext4fs -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+out/host/linux-x86/bin/mkuserimg.sh:echo "make_ext4fs -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+
+#Package complete:
+device/malata/smb_a1002/releasetools/squisher:echo "Package complete: $OUTFILE"
+device/malata/smb_b9701/releasetools/squisher:echo "Package complete: $OUTFILE"
+device/htc/leo/releasetools/squisher:echo "Package complete: $OUTFILE"
+device/motorola/jordan/releasetools/squisher:echo "Package complete: $OUTFILE"
+vendor/cyanogen/tools/squisher:echo "Package complete: $OUTFILE"
+
+#bacon:
+build/core/Makefile:bacon: otapackage
+build/core/Makefile:.PHONY: otapackage bacon
+build/core/Makefile:bacon: otapackage
+development/samples/BackupRestore/res/layout/backup_restore.xml:            <RadioButton android:id="@+id/bacon"
+development/samples/BackupRestore/res/layout/backup_restore.xml:                android:text="@string/bacon_label"/>
+development/samples/BackupRestore/res/values/strings.xml:  <string name="bacon_label">Bacon</string>
+device/samsung/vzwtab/build.sh:make -j8 bacon
+device/htc/liberty/README:  $ make -j4 bacon
+device/motorola/jordan/README:mka bacon
+external/vim/runtime/doc/usr_44.txt:			bacon and spam ~
+external/webkit/JavaScriptCore/ChangeLog-2009-06-16:        formed from two layers (in effect giving us a kind on bacon double cheeseburger) - with the
+external/lsof/00DIST:		David Bacon <bacon@birch.eecs.lehigh.edu>.
+external/srec/config/en.us/dictionary/large.ok:bacon bAk~
+external/srec/config/en.us/dictionary/large.ok:baconton bAk~t~
+
+#grep -r "squisher" *:
+build/core/Makefile:	./vendor/cyanogen/tools/squisher
+-device/malata/smb_a1002/releasetools/squisher.sh:# This script is included in squisher
+-device/malata/smb_a1002/releasetools/squisher:	. $ANDROID_BUILD_TOP/device/malata/smb_a1002/releasetools/squisher.sh
+-device/malata/smb_a1002/BoardConfig.mk:# Override cyanogen squisher to customize our update zip package
+-device/malata/smb_a1002/BoardConfig.mk:TARGET_CUSTOM_RELEASETOOL := ./device/malata/smb_a1002/releasetools/squisher
+-device/malata/smb_b9701/releasetools/squisher.sh:# This script is included in squisher
+-device/malata/smb_b9701/releasetools/squisher:	. $ANDROID_BUILD_TOP/device/malata/smb_b9701/releasetools/squisher.sh
+-device/malata/smb_b9701/BoardConfig.mk:# Override cyanogen squisher to customize our update zip package
+-device/malata/smb_b9701/BoardConfig.mk:TARGET_CUSTOM_RELEASETOOL := ./device/malata/smb_b9701/releasetools/squisher
+-device/htc/leo/releasetools/squisher.sh:# This script is included in squisher
+-device/htc/leo/releasetools/squisher:        . $ANDROID_BUILD_TOP/device/htc/leo/releasetools/squisher.sh
+-device/htc/leo/BoardConfig.mk:TARGET_CUSTOM_RELEASETOOL := device/htc/leo/releasetools/squisher
+-device/motorola/jordan/releasetools/squisher.sh:# This script is included in squisher
+-device/motorola/jordan/releasetools/squisher:if [ -f $ANDROID_BUILD_TOP/device/motorola/jordan/releasetools/squisher.sh ]; then
+-device/motorola/jordan/releasetools/squisher:	. $ANDROID_BUILD_TOP/device/motorola/jordan/releasetools/squisher.sh
+-device/motorola/jordan/BoardConfig.mk:# Override cyanogen squisher to customize our update zip package
+-device/motorola/jordan/BoardConfig.mk:TARGET_CUSTOM_RELEASETOOL := ./device/motorola/jordan/releasetools/squisher
+

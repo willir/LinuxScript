@@ -1,0 +1,86 @@
+#make/emulator source
+make -j4
+emulator -avd em22 -data out/target/product/generic/userdata.img -system out/target/product/generic/system.img -ramdisk out/target/product/generic/ramdisk.img -kernel prebuilt/android-arm/kernel/kernel-qemu -no-boot-anim -logcat '*:e'
+
+#-------------------
+adb remount
+adb shell
+rm /system/app/filename.apk
+pm uninstall `awk -F \" '/'filename'/ { print $2 }' /data/system/packages.xml`
+
+
+adb shell rm system/app/YouTube.apk
+adb uninstall com.google.android.youtube
+#-------------------
+
+adb shell cat /proc/mtd # info about part..
+adb shell df # free esource
+
+adb logcat -b radio # radio logcat.
+adb logcat -b events
+
+
+zip -d Contacts.apk META-INF/*  #Remove existing signature
+jarsigner -verbose -keystore cipcon-contacts-key.keystore Contacts.apk shared #add new sign
+
+#unpack apk file.
+#-------------------
+#http://code.google.com/p/android-apktool/
+apktool d Application.apk AppDir
+sudo update-java-alternatives -s java-6-sun #if error
+#-------------------
+
+# get adnroid config file
+#-------------------
+adb pull /proc/config.gz .
+gunzip config.gz
+mv config .config #move to kernal source
+	#or together
+adb pull /proc/config.gz . && gunzip config.gz && mv config .config
+#-------------------
+
+# LOG
+#-------------------
+
+adb shell cat /proc/kmsg
+	# or simple
+adb shell dmesg
+#-------------------
+
+# MULCA SIGN APK
+#-------------------
+mkdir META-INF
+echo "163abca4ababbf867ac7129078e195c1432bfca8407215950649cfac70479214795754a3c8" > META-INF/ROMOS_SIGN.SF
+zip -r -q scheduler_st2.apk META-INF
+rm -r META-INF/
+	# or together
+mkdir META-INF && echo "163abca4ababbf867ac7129078e195c1432bfca8407215950649cfac70479214795754a3c8" > META-INF/ROMOS_SIGN.SF && zip -r -q scheduler_st.apk META-INF && rm -r META-INF/
+#-------------------
+
+# MULCA SIGN APK
+#-------------------
+zip -d -q scheduler_st.apk META-INF/ROMOS_SIGN.SF
+#-------------------
+
+# for nook color adb
+#------------------- 
+sudo sh -c 'mkdir -p ~/.android; echo 0x2080 > ~/.android/adb_usb.ini';
+#-------------------
+
+#intall system apk
+#------------------- 
+adb shell
+mount /system
+exit
+adb push c:\Gmail.apk /system/app/Gmail.apk
+	#or
+adb install c:\Gmail.apk /system/app/Gmail.apk
+ls /system/app
+#------------------- 
+
+mount -o rw,remount -t yaffs2 /dev/block/mtdblock3 /system # remount system
+
+adb shell dumpsys iphonesubinfo # get imei 
+294A215E7639C2C4 # sony ericsson xperia ray unlock bootloader IMEI: 359590041369007
+
+adb logcat -d | ndk-stack -sym obj/local/armeabi # Show normal Stack trace of NDK crash

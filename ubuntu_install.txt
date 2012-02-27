@@ -1,0 +1,75 @@
+# Compiz:
+#----------
+# http://bysoftware.info/stat/print:page,1,626-ustanovka-compiz-v-ubuntu-1004.html
+sudo apt-get install compizconfig-settings-manager
+sudo apt-get install simple-ccsm compiz-fusion-plugins-extra compiz-fusion-plugins-main compiz-plugins emerald
+sudo apt-get purge simple-ccsm compiz-fusion-plugins-extra compiz-fusion-plugins-main
+#----------
+
+sudo apt-get install alien dpkg-dev debhelper build-essential #for rpm
+sudo apt-get install p7zip #for 7z
+sudo apt-get install unace #for unpack ace.
+sudo apt-get install arj #for pack/unpack arj
+sudo apt-get install lha #for pack/unpack lha
+sudo apt-get install cpio #for cpio
+#all archiv
+sudo apt-get install alien dpkg-dev debhelper build-essential p7zip unace arj lha cpio
+
+#install "unyaffs" for unpack system.img and userdata.img
+#-----------------
+#go to "http://code.google.com/p/unyaffs/" and download unyaffs.c and unyaffs.h
+	#then
+gcc -o unyaffs unyaffs.c
+mv unyaffs ~/bin/unyaffs
+#-----------------
+
+# install java 5
+#-----------------
+sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy main multiverse"
+sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main multiverse"
+sudo apt-get update
+sudo apt-get install sun-java5-jdk
+#-----------------
+
+sudo apt-get install goldendict # goldendict(lingvo)
+sudo apt-get install pidgin #for icq
+
+sudo apt-get install git #for git
+
+#install deadbeef - audio player.
+#----------
+sudo add-apt-repository ppa:alexey-smirnov/deadbeef
+sudo apt-get update
+sudo apt-get install deadbeef
+#----------
+
+sudo apt-get install ubuntu-restricted-extras # Codecs
+sudo apt-get install vlc mozilla-plugin-vlc # video player.
+
+sudo apt-get install ktorrent 
+
+#for theme
+#----------
+sudo add-apt-repository ppa:tiheum/equinox
+sudo apt-get update && sudo apt-get install faenza-icon-theme equinox-theme equinox-ubuntu-theme
+#----------
+
+sudo apt-get install krusader #total comander alternative, alse is http://doublecmd.sourceforge.net/
+
+#install skype
+#-----------------
+echo "deb http://archive.canonical.com/ubuntu maverick partner #for skype" >> /etc/apt/sources.list #add new repository, for skype.
+sudo apt-get update
+sudo apt-get install skype
+#-----------------
+
+#install FUSON-exFAT
+#-----------------
+sudo add-apt-repository ppa:relan/exfat
+sudo apt-get update
+sudo apt-get install fuse-exfat
+#-----------------
+
+sudo apt-get install texlive* kile # install pdf-editor.
+sudo apt-get install inkscape # for svg to other format.
+sudo apt-get install schedtool

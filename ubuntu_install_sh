@@ -1,0 +1,208 @@
+#!/bin/bash
+
+curDir=`pwd`;
+
+scriptDir=${0%/*};
+cd $scriptDir;
+scriptDir=`pwd`;
+cd $curDir
+
+sudo echo "";
+
+echo "Y" | sudo apt-get update;
+echo "Y" | sudo apt-get upgrade;
+
+mkdir ~/bin
+
+grep 'export PATH="${PATH}:~/bin"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/bin"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+if [ ! -d ~/Programs ]
+then
+	mkdir ~/Programs
+fi
+
+echo "Y" | sudo apt-get remove pitivi #del pitivi for change video
+echo "Y" | sudo apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant messages
+echo "Y" | sudo apt-get remove gwibber gwibber-service #The client of microblogs
+echo "Y" | sudo apt-get remove vino #for show destop.
+echo "Y" | sudo apt-get remove computer-janitor-gtk # for system clearing.
+echo "Y" | sudo apt-get remove rhythmbox totem totem-common #default video and audio players.
+echo "Y" | sudo apt-get remove banshee # banshee.
+echo "Y" | sudo dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
+echo "Y" | sudo apt-get install kate
+
+echo "Archivers and curl"
+echo "Y" | sudo apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip
+
+echo "goldendict pidgin git"
+echo "Y" | sudo apt-get install goldendict pidgin git
+
+echo "install deadbeef - audio player."
+echo "Y" | sudo add-apt-repository ppa:alexey-smirnov/deadbeef
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install deadbeef
+
+echo "Y" | sudo apt-get install ubuntu-restricted-extras # Codecs
+echo "Y" | sudo apt-get install vlc mozilla-plugin-vlc # video player.
+
+echo "Y" | sudo apt-get install ktorrent
+
+echo "Y" | sudo apt-get install krusader
+
+# install java 5
+echo "Y" | sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy main multiverse"
+echo "Y" | sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main multiverse"
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install sun-java5-jdk
+# /install java 5
+
+
+echo "Y" | sudo apt-get install openjdk-6-jdk
+echo "Y" | sudo apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
+echo "Y" | sudo apt-get install xserver-xorg-input-evtouch dpkg-dev
+echo "Y" | sudo apt-get install libnss3-tools rpl
+
+echo "Installing skype"
+echo "deb http://archive.canonical.com/ubuntu maverick partner #for skype" | sudo tee -a /etc/apt/sources.list #add new repository, for skype.
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install skype
+
+# install unyaffs
+rm -rf ~/Programs/Unyaffs;
+mkdir ~/Programs/Unyaffs;
+cd ~/Programs/Unyaffs;
+
+wget http://unyaffs.googlecode.com/files/unyaffs.c
+wget http://unyaffs.googlecode.com/files/unyaffs.h
+gcc -o unyaffs unyaffs.c;
+chmod 755 unyaffs;
+mv unyaffs ~/bin
+
+cd $curDir
+# /install unyaffs
+
+sudo gconftool-2 --set "/apps/metacity/general/button_layout" --type string "menu:minimize,maximize,close" # close to the right
+
+echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | sudo tee /etc/udev/rules.d/51-android.rules >> /dev/null # for htc
+sudo chmod a+r /etc/udev/rules.d/51-android.rules
+
+# download repo
+curl https://android.git.kernel.org/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+# /download repo
+
+#install FUSON-exFAT
+#-----------------
+sudo add-apt-repository ppa:relan/exfat
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install fuse-exfat
+#-----------------
+
+# install split_bootimg
+rm -rf ~/Programs/Split_bootimg;
+mkdir ~/Programs/Split_bootimg;
+cd ~/Programs/Split_bootimg;
+
+wget http://zen-droid.googlecode.com/files/split_bootimg.pl
+chmod +x split_bootimg.pl
+cp split_bootimg.pl ~/bin/split_bootimg.pl
+
+cd $curDir
+# /install split_bootimg
+
+# download sdk
+if [ ! -d /Programs/Android ]
+then
+	mkdir ~/Programs/Android
+fi
+
+rm -rf ~/Programs/Android/SDK;
+mkdir ~/Programs/Android/SDK;
+cd ~/Programs/Android/SDK;
+
+wget http://dl.google.com/android/android-sdk_r12-linux_x86.tgz
+tar -xf android-sdk_r12-linux_x86.tar
+
+if [ ! -d /Applications ]
+then
+	mkdir ~/Applications
+fi
+mv -f android-sdk-linux_x86/ ~/Applications/SDK
+
+grep 'export PATH="${PATH}:~/Applications/SDK/tools"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/SDK/tools"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+grep 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+~/Applications/SDK/tools/android &
+# /download sdk
+
+# download eclipse
+rm -rf ~/Programs/JAVA/Eclipse
+mkdir -p ~/Programs/JAVA/Eclipse
+cd ~/Programs/JAVA/Eclipse
+
+mkdir -p ~/Applications
+
+curl http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-linux-gtk-x86_64.tar.gz > eclipse.tar.gz
+gzip -dc eclipse.tar.gz | tar -x
+mv eclipse ~/Applications/EclipseAndroid
+
+ln -s ~/Applications/EclipseAndroid/eclipse ~/Desktop/eclipseAndroid
+~/Applications/EclipseAndroid/eclipse
+
+echo '==============================='
+echo '==============================='
+echo '==============================='
+echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
+echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
+echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
+echo '==============================='
+echo '==============================='
+echo '==============================='
+
+cd $curDir;
+# /download eclipse
+
+# install crebs for create wallpapers slideshow
+sudo add-apt-repository ppa:crebs/ppa
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install crebs
+# /install crebs for create wallpapers slideshow
+
+# install VirtualBox
+grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | sudo tee -a /etc/apt/sources.list >> /dev/null;
+	mkdir -p ~/Programs/AptSecureKeys
+	cd ~/Programs/AptSecureKeys
+	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+fi
+echo 'Y' | sudo apt-get update
+echo 'Y' | sudo apt-get install virtualbox-4.1
+
+cd $curDir;
+# /install VirtualBox
+
+echo "Y" | sudo apt-get install bouml; # install bouml
+
+# install AgroUML
+#mkdir -p ~/Programs/UML/AgroUML;
+#cd ~/Programs/UML/AgroUML;
+#curl  http://argouml-downloads.tigris.org/jws/argouml-latest-stable.jnlp > argouml-latest-stable.jnlp;
+# /install AgroUML
+
+cd $curDir;
+exit 0;

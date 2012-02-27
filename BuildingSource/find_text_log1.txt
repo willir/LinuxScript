@@ -1,0 +1,3 @@
+out/host/linux-x86/obj/EXECUTABLES/mkuserimg.sh_intermediates/mkuserimg.sh:echo "make_ext4fs -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+out/host/linux-x86/bin/mkuserimg.sh:echo "make_ext4fs -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+system/extras/ext4_utils/mkuserimg.sh:echo "make_ext4fs -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"

@@ -1,0 +1,9 @@
+git config --global core.autocrlf true
+git config --global user.name 'Rapetov Anton'
+git config --global user.email willir29@yandex.ru
+
+git commit -a
+
+# if android.git.kernel.org[0: 149.20.4.77]: errno=Connection refused
+repo init -u <manifest_git_url> -b <manifest_branch> --repo-url=git://codeaurora.org/tools/repo.git
+

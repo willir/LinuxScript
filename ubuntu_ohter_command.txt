@@ -1,0 +1,118 @@
+#info:
+#------------------------
+cat /proc/cpuinfo
+cat /proc/meminfo
+lsusb
+uname -a # OS name
+nslookup ya.ru
+ifconfig
+#------------------------
+
+#add to path:
+#------------------------
+sudo gedit ~/.bashrc
+export PATH="${PATH}:/tralala/la/lala"
+	#or
+sudo su
+echo 'export PATH="${PATH}:/tralala/la/lala"' >> ~/.bashrc
+#------------------------
+
+#mount disk
+sudo mount --help
+#------------------------
+
+#create empty file
+#------------------------
+touch new_file.txt
+	#or
+echo "" > new_file.txt
+#------------------------
+
+# write to file from root
+#------------------------
+sudo bash -c 'echo "test" >> test.txt;'
+echo 'echo "test" >> test.txt' | sudo bash
+echo "test" | sudo tee -a test.txt >> /dev/null
+#------------------------
+
+#------------------------
+#linux bash script begining with:
+#!/bin/bash
+#------------------------
+
+gzip -dc name.tar.gz | tar xv - #unpack gzip-tar
+gzip -dc name.cpio.gz | cpio -i -F #unpack gzip-cpio
+unace x archive.ace #unpack ace
+
+#install rpm
+#------------------------
+sudo alien packagename.rpm #convert from rpm to debian.
+sudo dpkg -i packagename.deb #install debian
+#------------------------
+
+echo "asdas" &> /dev/null #Подавление вывода.
+
+dpkg -l # print all packets
+dpkg -l | grep "name" # search packets by name.
+
+cmp file1 file2 # compare two files. Print msg if they is not equals, print nothing otherwise.
+
+#search files
+#------------------------
+find -name 'fileName'
+#------------------------
+
+#Processes
+#------------------------
+ps -A # ALL Processes list
+sudo kill -9 1111 # kill process with ID == 1111 without query (hard kill)
+sudo killall proc_name # kill all processes with name == proc_name
+top # processes list sorted by cpu %
+#------------------------
+
+# show string as hex.
+#------------------------
+echo "hella\\nasd" | hexdump -v -e '/1 "%02X "'; echo
+#------------------------
+
+#------------------------
+$ echo 'password,firstname,lastname' | cut -d',' -f1
+	#password
+$ echo 'password,firstname,lastname' | cut -d',' -f2
+	#firstname
+#------------------------
+
+# mount exFAT.
+#------------------------
+sudo mkdir [mountpoint]
+sudo mount –t exfat-fuse [device_path] [mountpoint]
+#------------------------
+
+
+for I in {00..10}; do echo "http://kaf27.../IMG57`printf "%d" $I`"; done
+
+
+# send big qty files
+#------------
+nc -l 6000 | tar -x # for listen
+tar -c ./* | nc -q0 192.168.1.203 6000
+#------------
+
+#kill X
+#------------
+sudo /etc/init.d/gdm stop
+sudo pkill X # or sudo killall Xorg 
+#------------
+
+#add certs
+#------------
+sudo apt-get install libnss3-tools
+certutil -d sql:$HOME/.pki/nssdb -L # List all certificates
+certutil -d sql:$HOME/.pki/nssdb -L -n <certificate nickname> # List details of a certificate
+pk12util -d sql:$HOME/.pki/nssdb -i PKCS12_file.p12 # Add a personal certificate and private key for SSL client authentication
+certutil -d sql:$HOME/.pki/nssdb -D -n <certificate nickname> # Delete a certificate
+#------------
+
+find -type f -exec sed -i -e 's/search/replace/g' {} \; #replace "search" to "replace" into all text files.
+find -name "filename" | xargs -d "\n" rm -rf # delete all files/folders with name == "filename"
+

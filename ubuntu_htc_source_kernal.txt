@@ -1,0 +1,42 @@
+export PATH=$PATH:/home/willir/workspace/android/skib/source_froyo/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/bin
+export PATH=${PATH}:/home/willir/workspace/android/skib/source_froyo/out/host/linux-x86/bin
+
+#if error
+#-----------------
+gedit arch/arm/mach-msm/include/mach/camera.h&
+
+#and add next lines:
+
+#define CONFIG_MSM_CAMERA_LEGACY
+#define CONFIG_MSM_CAMERA
+#-----------------
+
+make ARCH=arm oldconfig
+make ARCH=arm menuconfig
+make -j3 ARCH=arm
+
+mkbootimg --kernel /home/willir/workspace/android/skib/htc_legend/source/arch/arm/boot/zImage --ramdisk /home/willir/workspace/android/skib/source_froyo/out/target/product/generic/ramdisk.img -o boot.img
+
+# To learn the base address from boot.img. 
+# Its very hard because little-ending.
+#-----------------
+dd if=boot.img bs=1 skip=14 count=2 conv=swab 2>/dev/null | hexdump -v -e '/1 "%02X"'; dd if=boot.img bs=1 skip=12 count=2 conv=swab 2>/dev/null | hexdump -v -e '/1 "%02X"'; echo "";
+#-----------------
+
+# base addresses (--base) for some devices:
+#-----------------
+# HTC legend:              0x12c00000       confirmed
+# HTC hero:                0x19200000       not confirmed
+# Nexus One:               0x20000000       not confirmed
+# LG:                      0x12200000       not confirmed
+# Huawei U8150:            0×00200000       not confirmed
+#-----------------
+
+# Command line (--cmdline) for some devices:
+#-----------------
+# HTC legend:              no_console_suspend=1 console=null                confirmed
+# HTC hero:                no_console_suspend=1 console=null                not confirmed
+# Nexus One:               no_console_suspend=1 console=null                not confirmed
+# LG :                     no_console_suspend=1 console=null                not confirmed
+# Huawei U8150:            no_console_suspend=1 console=null                not confirmed
+#-----------------
