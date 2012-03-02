@@ -34,6 +34,7 @@ echo "Y" | sudo apt-get remove rhythmbox totem totem-common #default video and a
 echo "Y" | sudo apt-get remove banshee # banshee.
 echo "Y" | sudo dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
 echo "Y" | sudo apt-get install kate
+echo "Y" | sudo apt-get install libmono-winforms2.0-cil # install winform for mono
 
 echo "Archivers and curl"
 echo "Y" | sudo apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip
