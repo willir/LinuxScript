@@ -1,0 +1,3 @@
+C:/QtSDK/mingw/bin/mingw32-make -f Makefile.Release
+
+C:\Programming\QtStatic\bin\qmake.exe Makefile.Release

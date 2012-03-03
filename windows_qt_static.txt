@@ -1,0 +1,74 @@
+download source
+
+1)open "<QTDIR>\mkspecs\win32-g++\qmake.conf" and replace this tags.
+QMAKE_LFLAGS = -static -static-libgcc -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
+QMAKE_LFLAGS_DLL = -static
+
+
+2) create "<QTDIR>\mmake.bat" with this code (without "-----------").
+
+-----------
+call bin\qtvars.bat
+pause
+configure -static -release -no-exceptions -no-qt3support -qt-gif -qt-libpng -qt-libjpeg -no-phonon -no-webkit -no-phonon-backend -platform win32-g++
+#pause
+mingw32-make
+-----------
+
+3) create "<QTDIR>\bin\qtvars.bat" with this code (without "-----------").
+P.S. Set yours dirs.
+
+-----------
+echo Setting up a Qt environment...
+ 
+set QTDIR=C:\Programming\QtStatic
+echo -- QTDIR set to C:\Programming\QtStatic
+set PATH=C:\Programming\QtStatic\bin;%PATH%
+echo -- Added C:\Programming\QtStatic\bin to PATH
+set MINGWDIR=C:\Programming\MinGW
+echo -- MINGWDIR set to C:\Programming\MinGW
+set PATH=C:\Programming\MinGW\bin;%PATH%
+echo -- Added C:\Programming\MinGW\bin to PATH
+set QMAKESPEC=win32-g++
+echo -- QMAKESPEC set to "win32-g++"
+-----------
+
+4) open "<QTDIR>\projects.pro" and change that:
+P.S. Simple comment-out "examples" and "demos".
+
+-----------
+#process the projects
+for(PROJECT, $$list($$lower($$unique(QT_BUILD_PARTS)))) {
+    isEqual(PROJECT, tools) {
+       !cross_compile:SUBDIRS += tools
+       else:SUBDIRS += tools/qtestlib
+    } else:isEqual(PROJECT, examples) {
+#       SUBDIRS += examples
+    } else:isEqual(PROJECT, demos) {
+#       SUBDIRS += demos
+    } else:isEqual(PROJECT, libs) {
+       include(src/src.pro)
+    } else:isEqual(PROJECT, docs) {
+       contains(QT_BUILD_PARTS, tools):include(doc/doc.pri)
+    } else:isEqual(PROJECT, translations) {
+       contains(QT_BUILD_PARTS, tools):include(translations/translations.pri)
+    } else:isEqual(PROJECT, qmake) {
+#      SUBDIRS += qmake
+    } else {
+       message(Unknown PROJECT: $$PROJECT)
+    }
+}
+-----------
+
+5) open "<QTDIR>\qmake\Makefile.win32*" and change that:
+change
+LFLAGS =
+to
+LFLAGS	    = -static-libgcc
+
+configure -static -platform win32-g++ -fast -no-exceptions -debug-and-release -opensource -developer-build -shared -qt-sql-sqlite -qt-sql-odbc -plugin-sql-odbc -no-qt3support -no-opengl -no-phonon -no-phonon-backend -nomake examples -nomake demos -webkit -script -declarative -qt-libtiff -openssl -I C:\Programming\OpenSSL-Win32\include -L c:\Programming\OpenSSL-Win32\lib\MinGW
+
+configure -embedded x86 -static -fast -no-exceptions -no-stl -no-accessibility -no-qt3support -no-xmlpatterns -no-phonon -no-phonon-backend -no-svg -no-webkit -no-sse -no-3dnow -no-sse2 -qt-zlib -qt-gif -qt-libtiff -qt-libpng -no-libmng -qt-libjpeg -no-openssl -no-nis -no-cups -no-iconv -no-dbus -no-freetype -qt-gfx-linuxfb -no-glib
+
+
+next run <QTDIR>\mmake.bat

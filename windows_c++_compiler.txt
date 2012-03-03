@@ -1,0 +1,7 @@
+
+__BORLANDC__   # identifier and Builder version number
+if __BORLANDC__ > 0x540
+IVCB IVVCL6
+VCL50_OR_HIGHER
+
+_MSC_VER       # identifier and MSVC    version number

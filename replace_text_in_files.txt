@@ -1,0 +1,29 @@
+
+curDir=`pwd`;
+listDir="src src/Receivers_Senders src/Tests Include/Receivers_Senders Include/Tests"
+
+listFile="";
+
+for dir in $listDir
+do
+	listFileT=`ls $dir`;
+	for fileT in $listFileT
+	do
+		listFile="${listFile} ${dir}/${fileT}";
+	done
+done
+
+for file in $listFile
+do
+	echo $file | grep "\\.[ch]pp" >> /dev/null;
+	if [ $? = 0 ]
+	then
+		echo "Replace in file: $file";
+		sed s/nextReciever/nextReceiver/g $file | tee $file >> /dev/null;
+	fi
+done;
+
+echo successful!!!;
+
+#echo "1234567890" > 1.txt
+#sed s/34/56/g 1.txt | tee 1.txt
