@@ -7,70 +7,73 @@ cd $scriptDir;
 scriptDir=`pwd`;
 cd $curDir
 
-echo "";
+sudo echo "";
 
-echo "Y" | apt-get update;
-echo "Y" | apt-get upgrade;
+echo "Y" | sudo apt-get update;
+echo "Y" | sudo apt-get upgrade;
 
 mkdir ~/bin
 
 grep 'export PATH="${PATH}:~/bin"' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
 then
-	echo 'export PATH="${PATH}:~/bin"' | tee -a ~/.bashrc >> /dev/null
+	echo 'export PATH="${PATH}:~/bin"' | sudo tee -a ~/.bashrc >> /dev/null
 fi
 
-if [ ! -d ~/Programs ]
-then
-	mkdir ~/Programs
-fi
 
-echo "Y" | apt-get remove pitivi #del pitivi for change video
-echo "Y" | apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant messages
-echo "Y" | apt-get remove gwibber gwibber-service #The client of microblogs
-echo "Y" | apt-get remove vino #for show destop.
-echo "Y" | apt-get remove computer-janitor-gtk # for system clearing.
-echo "Y" | apt-get remove rhythmbox totem totem-common #default video and audio players.
-echo "Y" | apt-get remove banshee # banshee.
-echo "Y" | dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
-echo "Y" | apt-get install kate
-echo "Y" | apt-get install libmono-winforms2.0-cil # install winform for mono
+mkdir -p ~/Programs
+
+echo "Y" | sudo apt-get remove pitivi #del pitivi for change video
+echo "Y" | sudo apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant messages
+echo "Y" | sudo apt-get remove gwibber gwibber-service #The client of microblogs
+echo "Y" | sudo apt-get remove vino #for show destop.
+echo "Y" | sudo apt-get remove computer-janitor-gtk # for system clearing.
+echo "Y" | sudo apt-get remove rhythmbox totem totem-common #default video and audio players.
+echo "Y" | sudo apt-get remove banshee # banshee.
+echo "Y" | sudo dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
+echo "Y" | sudo apt-get install kate
+echo "Y" | sudo apt-get install libmono-winforms2.0-cil # install winform for mono
 
 echo "Archivers and curl"
-echo "Y" | apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip rar unrar
+echo "Y" | sudo apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip rar unrar
 
 echo "goldendict pidgin git"
-echo "Y" | apt-get install goldendict pidgin git
+echo "Y" | sudo apt-get install goldendict pidgin git
 
 echo "install deadbeef - audio player."
-echo "Y" | add-apt-repository ppa:alexey-smirnov/deadbeef
-echo "Y" | apt-get update
-echo "Y" | apt-get install deadbeef
+echo "Y" | sudo add-apt-repository ppa:alexey-smirnov/deadbeef
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install deadbeef
 
-echo "Y" | apt-get install ubuntu-restricted-extras # Codecs
-echo "Y" | apt-get install vlc mozilla-plugin-vlc # video player.
+echo "Y" | sudo apt-get install ubuntu-restricted-extras # Codecs
+echo "Y" | sudo apt-get install vlc mozilla-plugin-vlc # video player.
 
-echo "Y" | apt-get install ktorrent
+echo "Y" | sudo apt-get install ktorrent
 
-echo "Y" | apt-get install krusader
+echo "Y" | sudo apt-get install krusader
 
 # install java 5
-echo "Y" | add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy main multiverse"
-echo "Y" | add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main multiverse"
-echo "Y" | apt-get update
+echo "Y" | sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy main multiverse"
+echo "Y" | sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main multiverse"
+echo "Y" | sudo apt-get update
 #echo "Y" | apt-get install sun-java5-jdk
 # /install java 5
 
 
-echo "Y" | apt-get install openjdk-6-jdk
-echo "Y" | apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
-echo "Y" | apt-get install xserver-xorg-input-evtouch dpkg-dev
-echo "Y" | apt-get install libnss3-tools rpl
+echo "Y" | sudo apt-get install openjdk-6-jdk
+echo "Y" | sudo apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev 
+echo "Y" | sudo apt-get install libwxgtk2.6-dev build-essential libncurses5-dev zlib1g-dev ia32-libs
+echo "Y" | sudo apt-get install lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush 
+echo "Y" | sudo apt-get install squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev 
+echo "Y" | sudo apt-get install x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev 
+echo "Y" | sudo apt-get install libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
+echo "Y" | sudo apt-get install xserver-xorg-input-evtouch dpkg-dev
+echo "Y" | sudo apt-get install libnss3-tools rpl
 
 echo "Installing skype"
-echo "Y" | add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
-echo "Y" | apt-get update
-echo "Y" | apt-get install skype
+echo "Y" | sudo add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install skype
 
 # install unyaffs2
 rm -rf ~/Programs/yaffs2utils;
@@ -88,10 +91,10 @@ mv unspare2 ~/bin
 cd $curDir
 # /install unyaffs2
 
-gconftool-2 --set "/apps/metacity/general/button_layout" --type string "menu:minimize,maximize,close" # close to the right
+#gconftool-2 --set "/apps/metacity/general/button_layout" --type string "menu:minimize,maximize,close" # close to the right
 
-echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | tee /etc/udev/rules.d/51-android.rules >> /dev/null # for htc
-chmod a+r /etc/udev/rules.d/51-android.rules
+echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | sudo tee /etc/udev/rules.d/51-android.rules >> /dev/null # for htc
+sudo chmod a+r /etc/udev/rules.d/51-android.rules
 
 # download repo
 curl https://android.git.kernel.org/repo > ~/bin/repo
@@ -100,9 +103,9 @@ chmod a+x ~/bin/repo
 
 #install FUSON-exFAT
 #-----------------
-add-apt-repository ppa:relan/exfat
-echo "Y" | apt-get update
-echo "Y" | apt-get install fuse-exfat
+sudo add-apt-repository ppa:relan/exfat
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install fuse-exfat
 #-----------------
 
 # install split_bootimg
@@ -133,13 +136,13 @@ mv -f android-sdk-linux/ ~/Applications/SDK
 grep 'export PATH="${PATH}:~/Applications/SDK/tools"' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
 then
-	echo 'export PATH="${PATH}:~/Applications/SDK/tools"' | tee -a ~/.bashrc >> /dev/null
+	echo 'export PATH="${PATH}:~/Applications/SDK/tools"' | sudo tee -a ~/.bashrc >> /dev/null
 fi
 
 grep 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
 then
-	echo 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' | tee -a ~/.bashrc >> /dev/null
+	echo 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' | sudo tee -a ~/.bashrc >> /dev/null
 fi
 
 ~/Applications/SDK/tools/android &
@@ -196,18 +199,18 @@ echo "Y" | apt-get install crebs
 grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
 then
-	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | tee -a /etc/apt/sources.list >> /dev/null;
+	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | sudo tee -a /etc/apt/sources.list >> /dev/null;
 	mkdir -p ~/Programs/AptSecureKeys
 	cd ~/Programs/AptSecureKeys
 	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
 fi
-echo 'Y' | apt-get update
-echo 'Y' | apt-get install virtualbox-4.1
+echo 'Y' | sudo apt-get update
+echo 'Y' | sudo apt-get install virtualbox-4.1
 
 cd $curDir;
 # /install VirtualBox
 
-echo "Y" | apt-get install bouml; # install bouml
+echo "Y" | sudo apt-get install bouml; # install bouml
 
 # install AgroUML
 #mkdir -p ~/Programs/UML/AgroUML;
