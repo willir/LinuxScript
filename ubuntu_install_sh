@@ -31,11 +31,12 @@ echo "Y" | sudo apt-get remove computer-janitor-gtk # for system clearing.
 echo "Y" | sudo apt-get remove rhythmbox totem totem-common #default video and audio players.
 echo "Y" | sudo apt-get remove banshee # banshee.
 echo "Y" | sudo dpkg -r transmission-common transmission-gtk # remode default bit-torrent client.
-echo "Y" | sudo apt-get install kate
+echo "Y" | sudo apt-get install kate wine
 echo "Y" | sudo apt-get install libmono-winforms2.0-cil # install winform for mono
 
 echo "Archivers and curl"
-echo "Y" | sudo apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip rar unrar
+echo "Y" | sudo apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj 
+echo "Y" | sudo apt-get install lha cpio curl zip rar unrar
 
 echo "goldendict pidgin git"
 echo "Y" | sudo apt-get install goldendict pidgin git
@@ -160,6 +161,12 @@ tar -jxvf android-ndk-r7b-linux-x86.tar.bz2
 
 mkdir -p ~/Applications
 mv -f android-ndk-r7b/ ~/Applications/NDK
+
+grep 'export PATH="${PATH}:~/Applications/NDK"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/NDK"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
 # /Download NDK
 
 # download eclipse
