@@ -26,8 +26,7 @@ then
 fi
 
 echo "Y" | apt-get remove pitivi #del pitivi for change video
-echo "Y" | apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant
-messages
+echo "Y" | apt-get remove empathy empathy-common nautilus-sendto-empathy #The client of instant messages
 echo "Y" | apt-get remove gwibber gwibber-service #The client of microblogs
 echo "Y" | apt-get remove vino #for show destop.
 echo "Y" | apt-get remove computer-janitor-gtk # for system clearing.
@@ -38,8 +37,7 @@ echo "Y" | apt-get install kate
 echo "Y" | apt-get install libmono-winforms2.0-cil # install winform for mono
 
 echo "Archivers and curl"
-echo "Y" | apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha
-cpio curl zip
+echo "Y" | apt-get install alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj lha cpio curl zip rar unrar
 
 echo "goldendict pidgin git"
 echo "Y" | apt-get install goldendict pidgin git
@@ -58,24 +56,19 @@ echo "Y" | apt-get install krusader
 
 # install java 5
 echo "Y" | add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy main multiverse"
-echo "Y" | add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main
-multiverse"
+echo "Y" | add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ hardy-updates main multiverse"
 echo "Y" | apt-get update
-echo "Y" | apt-get install sun-java5-jdk
+#echo "Y" | apt-get install sun-java5-jdk
 # /install java 5
 
 
 echo "Y" | apt-get install openjdk-6-jdk
-echo "Y" | apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev
-build-essential libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib
-g++-multilib pngcrush squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev x11proto-core-dev
-libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
+echo "Y" | apt-get install git-core gnupg flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential libncurses5-dev zlib1g-dev ia32-libs lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
 echo "Y" | apt-get install xserver-xorg-input-evtouch dpkg-dev
 echo "Y" | apt-get install libnss3-tools rpl
 
 echo "Installing skype"
-echo "deb http://archive.canonical.com/ubuntu maverick partner #for skype" | tee -a
-/etc/apt/sources.list #add new repository, for skype.
+echo "Y" | add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
 echo "Y" | apt-get update
 echo "Y" | apt-get install skype
 
@@ -95,11 +88,9 @@ mv unspare2 ~/bin
 cd $curDir
 # /install unyaffs2
 
-gconftool-2 --set "/apps/metacity/general/button_layout" --type string
-"menu:minimize,maximize,close" # close to the right
+gconftool-2 --set "/apps/metacity/general/button_layout" --type string "menu:minimize,maximize,close" # close to the right
 
-echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | tee
-/etc/udev/rules.d/51-android.rules >> /dev/null # for htc
+echo 'SUBSYSTEM=="usb", SYSFS{idVendor}=="0bb4", MODE="0666"' | tee /etc/udev/rules.d/51-android.rules >> /dev/null # for htc
 chmod a+r /etc/udev/rules.d/51-android.rules
 
 # download repo
@@ -136,14 +127,14 @@ rm -rf ~/Programs/Android/SDK;
 mkdir ~/Programs/Android/SDK;
 cd ~/Programs/Android/SDK;
 
-wget http://dl.google.com/android/android-sdk_r12-linux_x86.tgz
-tar -xf android-sdk_r12-linux_x86.tar
+wget http://dl.google.com/android/android-sdk_r16-linux.tgz
+tar -xf android-sdk_r16-linux.tgz
 
 if [ ! -d /Applications ]
 then
 	mkdir ~/Applications
 fi
-mv -f android-sdk-linux_x86/ ~/Applications/SDK
+mv -f android-sdk-linux/ ~/Applications/SDK
 
 grep 'export PATH="${PATH}:~/Applications/SDK/tools"' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
@@ -167,14 +158,12 @@ cd ~/Programs/JAVA/Eclipse
 
 mkdir -p ~/Applications
 
-curl
-http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops/R-3.7-201106131736/ecli
-pse-SDK-3.7-linux-gtk-x86_64.tar.gz > eclipse.tar.gz
+curl http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-linux-gtk-x86_64.tar.gz > eclipse.tar.gz
 gzip -dc eclipse.tar.gz | tar -x
 mv eclipse ~/Applications/EclipseAndroid
 
 ln -s ~/Applications/EclipseAndroid/eclipse ~/Desktop/eclipseAndroid
-~/Applications/EclipseAndroid/eclipse
+~/Applications/EclipseAndroid/eclipse &
 
 echo '==============================='
 echo '==============================='
@@ -199,8 +188,7 @@ echo "Y" | apt-get install crebs
 grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
 if [ $? != 0 ]
 then
-	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | tee -a
-/etc/apt/sources.list >> /dev/null;
+	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | tee -a /etc/apt/sources.list >> /dev/null;
 	mkdir -p ~/Programs/AptSecureKeys
 	cd ~/Programs/AptSecureKeys
 	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
