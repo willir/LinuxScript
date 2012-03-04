@@ -34,6 +34,15 @@ echo "Y" | sudo dpkg -r transmission-common transmission-gtk # remode default bi
 echo "Y" | sudo apt-get install --allow-unauthenticated kate wine
 echo "Y" | sudo apt-get install --allow-unauthenticated libmono-winforms2.0-cil # install winform for mono
 
+# browsers
+echo "Y" | sudo apt-get install --allow-unauthenticated chromium-browser 
+
+echo "Y" | sudo add-apt-repository "deb http://deb.opera.com/opera/ stable non-free"
+wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install --allow-unauthenticated opera
+# /browsers
+
 echo "Archivers and curl"
 echo "Y" | sudo apt-get install --allow-unauthenticated alien dpkg-dev debhelper build-essential p7zip p7zip-full unace arj 
 echo "Y" | sudo apt-get install --allow-unauthenticated lha cpio curl zip rar unrar
@@ -75,6 +84,13 @@ echo "Installing skype"
 echo "Y" | sudo add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
 echo "Y" | sudo apt-get update
 echo "Y" | sudo apt-get install --allow-unauthenticated skype
+
+# install crebs for create wallpapers slideshow
+add-apt-repository ppa:crebs/ppa
+echo "Y" | apt-get update
+echo "Y" | apt-get install --allow-unauthenticated crebs
+# /install crebs for create wallpapers slideshow
+
 
 # install unyaffs2
 rm -rf ~/Programs/yaffs2utils;
@@ -195,12 +211,6 @@ echo '==============================='
 
 cd $curDir;
 # /download eclipse
-
-# install crebs for create wallpapers slideshow
-add-apt-repository ppa:crebs/ppa
-echo "Y" | apt-get update
-echo "Y" | apt-get install --allow-unauthenticated crebs
-# /install crebs for create wallpapers slideshow
 
 # install VirtualBox
 grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
