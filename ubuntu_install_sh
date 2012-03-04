@@ -226,7 +226,6 @@ echo '==============================='
 cd $curDir;
 # /download eclipse
 
-
 # install AgroUML
 #mkdir -p ~/Programs/UML/AgroUML;
 #cd ~/Programs/UML/AgroUML;
