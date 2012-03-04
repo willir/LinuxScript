@@ -79,6 +79,7 @@ echo "Y" | sudo apt-get install --allow-unauthenticated x11proto-core-dev libx11
 echo "Y" | sudo apt-get install --allow-unauthenticated libgl1-mesa-dev mingw32 gcc-4.3-multilib g++-4.3-multilib
 echo "Y" | sudo apt-get install --allow-unauthenticated xserver-xorg-input-evtouch dpkg-dev
 echo "Y" | sudo apt-get install --allow-unauthenticated libnss3-tools rpl
+echo "Y" | sudo apt-get install --allow-unauthenticated bouml; # install bouml
 
 echo "Installing skype"
 echo "Y" | sudo add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
@@ -90,6 +91,19 @@ add-apt-repository ppa:crebs/ppa
 echo "Y" | apt-get update
 echo "Y" | apt-get install --allow-unauthenticated crebs
 # /install crebs for create wallpapers slideshow
+
+# install VirtualBox
+grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo "Y" | sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free"
+	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+fi
+echo 'Y' | sudo apt-get update
+echo 'Y' | sudo apt-get install --allow-unauthenticated virtualbox-4.1
+
+cd $curDir;
+# /install VirtualBox
 
 
 # install unyaffs2
@@ -212,22 +226,6 @@ echo '==============================='
 cd $curDir;
 # /download eclipse
 
-# install VirtualBox
-grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/null
-if [ $? != 0 ]
-then
-	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | sudo tee -a /etc/apt/sources.list >> /dev/null;
-	mkdir -p ~/Programs/AptSecureKeys
-	cd ~/Programs/AptSecureKeys
-	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
-fi
-echo 'Y' | sudo apt-get update
-echo 'Y' | sudo apt-get install --allow-unauthenticated virtualbox-4.1
-
-cd $curDir;
-# /install VirtualBox
-
-echo "Y" | sudo apt-get install --allow-unauthenticated bouml; # install bouml
 
 # install AgroUML
 #mkdir -p ~/Programs/UML/AgroUML;
