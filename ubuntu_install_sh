@@ -217,9 +217,7 @@ grep 'deb http://download.virtualbox.org/virtualbox/debian' ~/.bashrc >> /dev/nu
 if [ $? != 0 ]
 then
 	echo 'deb http://download.virtualbox.org/virtualbox/debian maverick contrib non-free' | sudo tee -a /etc/apt/sources.list >> /dev/null;
-	mkdir -p ~/Programs/AptSecureKeys
-	cd ~/Programs/AptSecureKeys
-	wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
+	wget -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc | sudo apt-key add -
 fi
 echo 'Y' | sudo apt-get update
 echo 'Y' | sudo apt-get install --allow-unauthenticated virtualbox-4.1
