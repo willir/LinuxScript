@@ -32,3 +32,5 @@ sudo update-java-alternatives -s java-1.5.0-sun # set java5.
 sudo rm /etc/alternatives/javac && sudo ln -s /usr/lib/jvm/java-1.6.0-openjdk/bin/javac /etc/alternatives/javac && sudo chmod 777 /etc/alternatives/javac #change javac version
 #-------------------
 
+sudo modprobe atl1c # For setting ethernet drivers.
+
