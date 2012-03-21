@@ -32,5 +32,18 @@ sudo update-java-alternatives -s java-1.5.0-sun # set java5.
 sudo rm /etc/alternatives/javac && sudo ln -s /usr/lib/jvm/java-1.6.0-openjdk/bin/javac /etc/alternatives/javac && sudo chmod 777 /etc/alternatives/javac #change javac version
 #-------------------
 
-sudo modprobe atl1c # For setting ethernet drivers.
+# For setting ethernet drivers in NoutBook.
+#-------------------
+sudo modprobe atl1c
+echo "1969 1083" | sudo tee -a /sys/bus/pci/drivers/atl1c/new_id >> /dev/null
+sudo modprobe atl1c
+#-------------------
 
+#install Nvidia drivers 500
+#-------------------
+sudo /etc/init.d/gdm stop
+sudo pkill X # or sudo killall Xorg 
+sudo apt-get install ia32-libs
+sudo apt-get install build-essentionsl
+sudo ./NV.....
+#-------------------
