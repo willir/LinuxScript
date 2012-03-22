@@ -83,6 +83,7 @@ echo "Y" | sudo apt-get install --allow-unauthenticated bouml; # install bouml
 # install LaTeX
 echo "Y" | sudo apt-get install --allow-unauthenticated gedit-latex-plugin texlive-fonts-recommended latex-beamer texpower
 echo "Y" | sudo apt-get install --allow-unauthenticated texlive-pictures texlive-latex-extra texpower-examples imagemagick
+echo "Y" | sudo apt-get install --allow-unauthenticated texlive texlive-full
 #/install LaTeX
 
 echo "Installing skype"

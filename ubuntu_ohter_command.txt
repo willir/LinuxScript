@@ -116,3 +116,5 @@ certutil -d sql:$HOME/.pki/nssdb -D -n <certificate nickname> # Delete a certifi
 find -type f -exec sed -i -e 's/search/replace/g' {} \; #replace "search" to "replace" into all text files.
 find -name "filename" | xargs -d "\n" rm -rf # delete all files/folders with name == "filename"
 
+
+MY_DIR=`dirname $0` # get my dir.
