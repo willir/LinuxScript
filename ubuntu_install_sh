@@ -69,9 +69,8 @@ echo "Y" | sudo apt-get update
 #echo "Y" | apt-get install sun-java5-jdk
 # /install java 5
 
-
 echo "Y" | sudo apt-get install --allow-unauthenticated openjdk-6-jdk
-echo "Y" | sudo apt-get install --allow-unauthenticated git-core gnupg flex bison gperf libsdl-dev libesd0-dev 
+echo "Y" | sudo apt-get install --allow-unauthenticated git-core gnupg flex bison gperf libsdl-dev libesd0-dev ssh gitk
 echo "Y" | sudo apt-get install --allow-unauthenticated libwxgtk2.6-dev build-essential libncurses5-dev zlib1g-dev ia32-libs
 echo "Y" | sudo apt-get install --allow-unauthenticated lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib pngcrush 
 echo "Y" | sudo apt-get install --allow-unauthenticated squashfs-tools squashfs-tools-dbg wget schedtool libc6-dev 
@@ -80,6 +79,11 @@ echo "Y" | sudo apt-get install --allow-unauthenticated libgl1-mesa-dev mingw32 
 echo "Y" | sudo apt-get install --allow-unauthenticated xserver-xorg-input-evtouch dpkg-dev
 echo "Y" | sudo apt-get install --allow-unauthenticated libnss3-tools rpl
 echo "Y" | sudo apt-get install --allow-unauthenticated bouml; # install bouml
+
+# install LaTeX
+echo "Y" | sudo apt-get install --allow-unauthenticated gedit-latex-plugin texlive-fonts-recommended latex-beamer texpower
+echo "Y" | sudo apt-get install --allow-unauthenticated texlive-pictures texlive-latex-extra texpower-examples imagemagick
+#/install LaTeX
 
 echo "Installing skype"
 echo "Y" | sudo add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
