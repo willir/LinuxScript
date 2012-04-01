@@ -92,9 +92,9 @@ echo "Y" | sudo apt-get update
 echo "Y" | sudo apt-get install --allow-unauthenticated skype
 
 # install crebs for create wallpapers slideshow
-add-apt-repository ppa:crebs/ppa
-echo "Y" | apt-get update
-echo "Y" | apt-get install --allow-unauthenticated crebs
+sudo add-apt-repository ppa:crebs/ppa
+echo "Y" | sudo apt-get update
+echo "Y" | sudo apt-get install --allow-unauthenticated crebs
 # /install crebs for create wallpapers slideshow
 
 # install VirtualBox
