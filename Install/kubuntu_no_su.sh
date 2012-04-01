@@ -53,6 +53,24 @@ cp split_bootimg.pl ~/bin/split_bootimg.pl
 cd $curDir
 # /install split_bootimg
 
+# install apktool
+mkdir -p ~/Programs/apktool
+
+cd ~/Programs/apktool
+
+wget http://android-apktool.googlecode.com/files/apktool1.4.3.tar.bz2 -O apktoolGen.tar.bz2
+wget http://android-apktool.googlecode.com/files/apktool-install-linux-r04-brut1.tar.bz2 -O apktoolInstLinux.tar.bz2
+
+tar jx -f apktoolGen.tar.bz2
+tar jx -f apktoolInstLinux.tar.bz2
+
+mv apktool.jar ~/bin/apktool.jar
+mv apktool ~/bin/apktool
+mv aapt ~/bin/aapt
+
+cd $curDir
+#/install apktool
+
 # download sdk
 mkdir -p ~/Programs/Android
 
