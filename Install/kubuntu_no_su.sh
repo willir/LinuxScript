@@ -12,11 +12,6 @@ sudo echo "";
 mkdir ~/bin
 mkdir ~/Programs
 
-grep 'export PATH="${PATH}:~/bin"' ~/.bashrc >> /dev/null
-if [ $? != 0 ]
-then
-	echo 'export PATH="${PATH}:~/bin"' | sudo tee -a ~/.bashrc >> /dev/null
-fi
 
 # install yaffs2 utils
 rm -rf ~/Programs/yaffs2utils;
@@ -71,6 +66,31 @@ mv aapt ~/bin/aapt
 cd $curDir
 #/install apktool
 
+# install dex2jar
+rm -rf ~/Programs/dex2jar
+mkdir -p ~/Programs/dex2jar
+
+cd ~/Programs/dex2jar
+
+wget http://dex2jar.googlecode.com/files/dex2jar-0.0.9.8.tar.gz -O dex2jar.tar.gz
+tar zx -f dex2jar.tar.gz
+
+dex2jarDir=`ls -d */`;
+mv $dex2jarDir ~/bin/dex2jar
+
+cd $curDir
+#/install dex2jar
+
+# install jd-gui
+rm -rf ~/Programs/jd-gui
+mkdir -p ~/Programs/jd-gui
+cd ~/Programs/jd-gui
+
+wget http://java.decompiler.free.fr/jd-gui/downloads/jd-gui-0.3.3.linux.i686.tar.gz -O jdGui.tar.gz
+tar zx -f jdGui.tar.gz
+mv jd-gui ~/bin/jd-gui
+#/install jd-gui
+
 # download sdk
 mkdir -p ~/Programs/Android
 
@@ -84,17 +104,6 @@ tar -xf android-sdk_r17-linux.tgz
 mkdir -p ~/Applications
 mv -f android-sdk-linux/ ~/Applications/SDK
 
-grep 'export PATH="${PATH}:~/Applications/SDK/tools"' ~/.bashrc >> /dev/null
-if [ $? != 0 ]
-then
-	echo 'export PATH="${PATH}:~/Applications/SDK/tools"' | sudo tee -a ~/.bashrc >> /dev/null
-fi
-
-grep 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' ~/.bashrc >> /dev/null
-if [ $? != 0 ]
-then
-	echo 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' | sudo tee -a ~/.bashrc >> /dev/null
-fi
 
 ~/Applications/SDK/tools/android &
 # /download sdk
@@ -111,12 +120,6 @@ tar -jxvf android-ndk-r7b-linux-x86.tar.bz2
 
 mkdir -p ~/Applications
 mv -f android-ndk-r7b/ ~/Applications/NDK
-
-grep 'export PATH="${PATH}:~/Applications/NDK"' ~/.bashrc >> /dev/null
-if [ $? != 0 ]
-then
-	echo 'export PATH="${PATH}:~/Applications/NDK"' | sudo tee -a ~/.bashrc >> /dev/null
-fi
 # /Download NDK
 
 # download eclipse

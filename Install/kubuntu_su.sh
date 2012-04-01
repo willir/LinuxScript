@@ -107,4 +107,35 @@ add-apt-repository ppa:relan/exfat
 echo "Y" | apt-get update
 echo "Y" | apt-get install --allow-unauthenticated fuse-exfat
 #-----------------
+
+grep 'export PATH="${PATH}:~/bin"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/bin"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+grep 'export PATH="${PATH}:~/Applications/SDK/tools"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/SDK/tools"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+grep 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/SDK/platform-tools"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+grep 'export PATH="${PATH}:~/bin/dex2jar"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/bin/dex2jar"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
+grep 'export PATH="${PATH}:~/Applications/NDK"' ~/.bashrc >> /dev/null
+if [ $? != 0 ]
+then
+	echo 'export PATH="${PATH}:~/Applications/NDK"' | sudo tee -a ~/.bashrc >> /dev/null
+fi
+
 exit 0;
