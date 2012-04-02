@@ -129,7 +129,7 @@ cd ~/Programs/JAVA/Eclipse
 
 mkdir -p ~/Applications
 
-curl http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops/R-3.7-201106131736/eclipse-SDK-3.7-linux-gtk-x86_64.tar.gz > eclipse.tar.gz
+wget http://mirror.tspu.ru/eclipse/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-SDK-3.7.2-linux-gtk-x86_64.tar.gz -O eclipse.tar.gz
 gzip -dc eclipse.tar.gz | tar -x
 mv eclipse ~/Applications/EclipseAndroid
 
