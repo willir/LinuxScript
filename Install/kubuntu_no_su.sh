@@ -7,8 +7,6 @@ cd $scriptDir;
 scriptDir=`pwd`;
 cd $curDir
 
-sudo echo "";
-
 mkdir ~/bin
 mkdir ~/Programs
 
@@ -131,16 +129,20 @@ mkdir -p ~/Applications
 
 wget http://mirror.tspu.ru/eclipse/eclipse/downloads/drops/R-3.7.2-201202080800/eclipse-SDK-3.7.2-linux-gtk-x86_64.tar.gz -O eclipse.tar.gz
 gzip -dc eclipse.tar.gz | tar -x
-mv eclipse ~/Applications/EclipseAndroid
 
+cp -r eclipse ~/Applications/EclipseAndroid
 ln -s ~/Applications/EclipseAndroid/eclipse ~/Desktop/eclipseAndroid
 ~/Applications/EclipseAndroid/eclipse &
 
+mv eclipse ~/Applications/EclipsePython
+ln -s ~/Applications/EclipsePython/eclipse ~/Desktop/eclipsePython
+~/Applications/EclipsePython/eclipse &
+
 echo '==============================='
 echo '==============================='
 echo '==============================='
 echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
-echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
+echo 'Python - http://pydev.org/updates/';
 echo 'Android Development Tools - https://dl-ssl.google.com/android/eclipse/';
 echo '==============================='
 echo '==============================='
