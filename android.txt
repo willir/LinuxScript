@@ -84,3 +84,6 @@ adb shell dumpsys iphonesubinfo # get imei
 294A215E7639C2C4 # sony ericsson xperia ray unlock bootloader IMEI: 359590041369007
 
 adb logcat -d | ndk-stack -sym obj/local/armeabi # Show normal Stack trace of NDK crash
+
+adb reboot bootloader
+sudo ./fastboot flash boot ./path_to_boot_img/boot.img # flash bootimg
