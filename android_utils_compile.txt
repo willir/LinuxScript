@@ -1,0 +1,36 @@
+#Compile With ./configure
+#-------------------------------------------------
+# Select toolchain
+export NDKROOT="/home/willir/Applications/NDK"
+$NDKROOT/build/tools/make-standalone-toolchain.sh --platform=android-9 --install-dir=$NDKROOT/android_armeabi   
+
+# Export Vars
+export NDKROOT="/home/willir/Applications/NDK"
+
+export CC="$NDKROOT/android_armeabi/bin/arm-linux-androideabi-gcc #--sysroot=$NDKROOT/android_armeabi/sysroot"
+export CXX="$NDKROOT/android_armeabi/bin/arm-linux-androideabi-g++ #--sysroot=$NDKROOT/android_armeabi/sysroot"
+export AR="$NDKROOT/android_armeabi/bin/arm-linux-androideabi-ar"
+#export SYSROOT="$NDKROOT/android_armeabi/sysroot"
+
+#Compile
+./configure --host=arm-linux-androideabi
+make
+#-------------------------------------------------
+
+# Cleaning ./configure
+make distclean 
+#-------------------------------------------------
+
+# Compile the module of kernel
+make -C /full/path/to/kernel/ SUBDIRS=/full/path/to/module modules
+#-------------------------------------------------
+
+#lvm2 devmapper (dmsetup):
+# before ./configure :
+	export CC=arm-androideabi...
+	export CXX=...
+	export AR=...
+	export LD=...
+	export LD_LIBRARY_PATH=
+
+./configure --host=arm-none-linux-gnueabi CFLAGS=-static  --prefix=/home/leonid/baseLib/LVM2/
