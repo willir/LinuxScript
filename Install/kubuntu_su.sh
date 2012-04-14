@@ -66,7 +66,7 @@ echo "Y" | apt-get install --allow-unauthenticated texlive-pictures texlive-late
 echo "Y" | apt-get install --allow-unauthenticated texlive texlive-full
 #/install LaTeX
 
-echo "Y" | apt-get install --allow-unauthenticated qt-creator qt4-qtconfig qt4-qmake qt4-dev-tools qt4-designer # QT
+echo "Y" | apt-get install --allow-unauthenticated qtcreator qt4-qtconfig qt4-qmake qt4-dev-tools qt4-designer # QT
 
 echo "Installing skype"
 echo "Y" | add-apt-repository "deb http://archive.canonical.com/ubuntu maverick partner"
