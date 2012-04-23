@@ -96,8 +96,8 @@ rm -rf ~/Programs/Android/SDK;
 mkdir ~/Programs/Android/SDK;
 cd ~/Programs/Android/SDK;
 
-wget http://dl.google.com/android/android-sdk_r17-linux.tgz
-tar -xf android-sdk_r17-linux.tgz
+wget http://dl.google.com/android/android-sdk_r18-linux.tgz
+tar -xf android-sdk_r18-linux.tgz
 
 mkdir -p ~/Applications
 mv -f android-sdk-linux/ ~/Applications/SDK
@@ -113,11 +113,11 @@ rm -rf ~/Programs/Android/NDK;
 mkdir ~/Programs/Android/NDK;
 cd ~/Programs/Android/NDK;
 
-wget http://dl.google.com/android/ndk/android-ndk-r7b-linux-x86.tar.bz2
-tar -jxvf android-ndk-r7b-linux-x86.tar.bz2
+wget http://dl.google.com/android/ndk/android-ndk-r7c-linux-x86.tar.bz2
+tar -jxvf android-ndk-r7c-linux-x86.tar.bz2
 
 mkdir -p ~/Applications
-mv -f android-ndk-r7b/ ~/Applications/NDK
+mv -f android-ndk-r7c/ ~/Applications/NDK
 # /Download NDK
 
 # download eclipse
