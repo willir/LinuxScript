@@ -22,7 +22,12 @@ make distclean
 #-------------------------------------------------
 
 # Compile the module of kernel
+
+export NDKROOT="/home/willir/Applications/NDK"
+export CROSS_COMPILE="$NDKROOT/android_armeabi/bin/arm-linux-androideabi-"
+export ARCH=arm;
 make -C /full/path/to/kernel/ SUBDIRS=/full/path/to/module modules
+
 #-------------------------------------------------
 
 #lvm2 devmapper (dmsetup):

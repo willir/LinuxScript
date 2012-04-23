@@ -1,6 +1,6 @@
 #make/emulator source
 make -j4
-emulator -avd em22 -data out/target/product/generic/userdata.img -system out/target/product/generic/system.img -ramdisk out/target/product/generic/ramdisk.img -kernel prebuilt/android-arm/kernel/kernel-qemu -no-boot-anim -logcat '*:e'
+emulator-arm -avd em_2.3 -data out/target/product/generic/userdata.img -system out/target/product/generic/system.img -ramdisk out/target/product/generic/ramdisk.img -kernel prebuilt/android-arm/kernel/kernel-qemu -no-boot-anim -logcat '*:e'
 
 #-------------------
 adb remount
