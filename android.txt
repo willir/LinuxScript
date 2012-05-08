@@ -1,6 +1,6 @@
 #make/emulator source
 make -j4
-emulator-arm -avd em_2.3 -data out/target/product/generic/userdata.img -system out/target/product/generic/system.img -ramdisk out/target/product/generic/ramdisk.img -kernel prebuilt/android-arm/kernel/kernel-qemu -no-boot-anim -partition-size 512 -cpu-delay 0 -logcat '*:e' -qemu -m 1024
+emulator-arm -avd em_2.3 -data out/target/product/generic/userdata.img -system out/target/product/generic/system.img -ramdisk out/target/product/generic/ramdisk.img -kernel prebuilt/android-arm/kernel/kernel-qemu -no-boot-anim -partition-size 512 -cpu-delay 0 -logcat '*:e' -qemu -m 512
 
 #-------------------
 adb remount
