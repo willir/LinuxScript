@@ -73,3 +73,13 @@ sudo apt-get install fuse-exfat
 sudo apt-get install texlive* kile # install pdf-editor.
 sudo apt-get install inkscape # for svg to other format.
 sudo apt-get install schedtool
+
+#Dock-Like Taskbar in KDE 
+#---------------------
+sudo add-apt-repository ppa:gnumdk/ppa
+sudo apt-get update
+sudo apt-get install plasma-widget-icon-tasks
+
+sudo apt-get install libunity6 #Firefox UnityFox support
+sudo apt-get install python-dockmanager #Docky helper suppor
+#---------------------
