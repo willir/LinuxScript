@@ -87,3 +87,5 @@ adb logcat -d | ndk-stack -sym obj/local/armeabi # Show normal Stack trace of ND
 
 adb reboot bootloader
 sudo ./fastboot flash boot ./path_to_boot_img/boot.img # flash bootimg
+
+adb shell am start -W -a android.intent.action.MAIN -c android.intent.category.HOME # Press to Home
