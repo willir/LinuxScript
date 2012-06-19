@@ -89,3 +89,6 @@ adb reboot bootloader
 sudo ./fastboot flash boot ./path_to_boot_img/boot.img # flash bootimg
 
 adb shell am start -W -a android.intent.action.MAIN -c android.intent.category.HOME # Press to Home
+
+# Flash htc
+sudo $adbpath/adb -s HT0CKP800186 reboot && sudo $adbpath/fastboot erase cache && sudo $adbpath/fastboot erase userdata && sudo $adbpath/fastboot flash system out/target/product/passion/system.img && sudo $adbpath/fastboot flash boot out/target/product/passion/boot.img && sudo $adbpath/fastboot reboot
