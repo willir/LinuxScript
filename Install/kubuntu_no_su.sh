@@ -16,9 +16,9 @@ rm -rf ~/Programs/yaffs2utils;
 mkdir -p ~/Programs/yaffs2utils;
 cd ~/Programs/yaffs2utils;
 
-wget http://yaffs2utils.googlecode.com/files/yaffs2utils.tar.gz;
-tar -zxvf yaffs2utils.tar.gz yaffs2utils;
-cd yaffs2utils/src;
+wget https://yaffs2utils.googlecode.com/files/latest.tar.gz;
+tar -zxvf latest.tar.gz;
+cd latest;
 make;
 mv unyaffs2 ~/bin
 mv mkyaffs2 ~/bin
@@ -70,7 +70,7 @@ mkdir -p ~/Programs/dex2jar
 
 cd ~/Programs/dex2jar
 
-wget http://dex2jar.googlecode.com/files/dex2jar-0.0.9.8.tar.gz -O dex2jar.tar.gz
+wget http://dex2jar.googlecode.com/files/dex2jar-0.0.9.9.tar.gz -O dex2jar.tar.gz
 tar zx -f dex2jar.tar.gz
 
 dex2jarDir=`ls -d */`;
@@ -79,15 +79,7 @@ mv $dex2jarDir ~/bin/dex2jar
 cd $curDir
 #/install dex2jar
 
-# install jd-gui
-rm -rf ~/Programs/jd-gui
-mkdir -p ~/Programs/jd-gui
-cd ~/Programs/jd-gui
-
-wget http://java.decompiler.free.fr/jd-gui/downloads/jd-gui-0.3.3.linux.i686.tar.gz -O jdGui.tar.gz
-tar zx -f jdGui.tar.gz
-mv jd-gui ~/bin/jd-gui
-#/install jd-gui
+#JDGUI
 
 # download sdk
 mkdir -p ~/Programs/Android
@@ -96,8 +88,8 @@ rm -rf ~/Programs/Android/SDK;
 mkdir ~/Programs/Android/SDK;
 cd ~/Programs/Android/SDK;
 
-wget http://dl.google.com/android/android-sdk_r18-linux.tgz
-tar -xf android-sdk_r18-linux.tgz
+wget http://dl.google.com/android/android-sdk_r20.0.1-linux.tgz
+tar -xf android-sdk_r20.0.1-linux.tgz
 
 mkdir -p ~/Applications
 mv -f android-sdk-linux/ ~/Applications/SDK
@@ -114,10 +106,10 @@ mkdir ~/Programs/Android/NDK;
 cd ~/Programs/Android/NDK;
 
 wget http://dl.google.com/android/ndk/android-ndk-r7c-linux-x86.tar.bz2
-tar -jxvf android-ndk-r7c-linux-x86.tar.bz2
+tar -jxvf android-ndk-r8b-linux-x86.tar.bz2
 
 mkdir -p ~/Applications
-mv -f android-ndk-r7c/ ~/Applications/NDK
+mv -f android-ndk-r8b/ ~/Applications/NDK
 # /Download NDK
 
 # download eclipse
